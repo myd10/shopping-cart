@@ -42,8 +42,11 @@ def to_usd(my_price):
 #
 
 #defined variables
+subtotal_price = 0
+tax_amt = 0
 total_price = 0
 scanned_ids = [] #this will be a list to store scanned_id's and print after all id's have been entered
+grocery_list = []
 
 #date and time, help from https://www.youtube.com/watch?v=WB5eMfnBI-8
 from datetime import datetime
@@ -68,9 +71,9 @@ while True:
 for scanned_id in scanned_ids:
         matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
         matching_product = matching_products[0] #I have gotten an error here that the index is out of range
-        total_price = total_price + matching_product["price"]
-        print("Scanned Item: " + str(matching_product["name"]) + " " + str(matching_product["price"]))
-
+        subtotal_price = subtotal_price + matching_product["price"]
+        print(str(matching_product["name"]) + " " + str(matching_product["price"]))
+        
 #print(matching_products)
 
 #print(type(scanned_id))
@@ -80,23 +83,40 @@ for scanned_id in scanned_ids:
 #
 # Calculate, filter out bad answers, and display
 #
+
+#tax amount
+tax_amt = .10 * float(subtotal_price)
+
+#total 
+total_price = subtotal_price + tax_amt
+
+#
+# Displaying results
+#
+
 #HEADING
 print("---------------")
 print("Gregarious Groceries")
 print("---------------")
+
+#time of purchase
 print("Purchased at " + str(current_time) + " on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
 
-#END OF HEADING
+#What was purchased
+print("---------------")
+print("Today you purchased: ")
 
-print("YOUR TOTAL: $" + str(total_price))
+#Total cost
+print("---------------")
+print("Subtotal: $" + f"${subtotal_price:,.2f}")
+print("Tax: $" + f"${tax_amt:,.2f}")
+print("Total amount: " + f"${total_price:,.2f}")
 
-
-
-#print(products)
-
-#Bottom of Recipet
+#Thank you and come back
+print("---------------")
 print("For questions, comments, and concerns visit www.gregariousgroceries.com or give us a call at 202-954-3232")
-print("Have a GREGORIOUS day!")
+print("Have a GREGORIOUS day and we hope to see you again soon!")
+#print("\U0001f600")
 
 
 
