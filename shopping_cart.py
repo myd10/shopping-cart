@@ -41,19 +41,37 @@ def to_usd(my_price):
 # Input information / ID
 #
 
+#defined variables
 total_price = 0
+scanned_ids = [] #this will be a list to store scanned_id's and print after all id's have been entered
 
+#date and time, help from https://www.youtube.com/watch?v=WB5eMfnBI-8
+from datetime import datetime
+now = datetime.now()
+
+current_time = now.strftime("%H:%M:%S") #help from https://www.programiz.com/python-programming/datetime/current-time
+current_year = now.year
+current_month = now.month
+current_day = now.day
+current_hour = now.hour
+current_minute = now.minute
+
+
+#loop
 while True:
     scanned_id = input("Please enter a product ID number: ") #input returns a string datatype
     if scanned_id == "DONE":
         break
     else:
+        scanned_ids.append(scanned_id)
+
+for scanned_id in scanned_ids:
         matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
-        matching_product = matching_products[0]
-        total_price = total_price + float(matching_product["price"])
+        matching_product = matching_products[0] #I have gotten an error here that the index is out of range
+        total_price = total_price + matching_product["price"]
         print("Scanned Item: " + str(matching_product["name"]) + " " + str(matching_product["price"]))
 
-#print(Matching_products)
+#print(matching_products)
 
 #print(type(scanned_id))
 #print(scanned_id)
@@ -66,7 +84,8 @@ while True:
 print("---------------")
 print("Gregarious Groceries")
 print("---------------")
-print("date and time")
+print("Purchased at " + str(current_time) + " on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
+
 #END OF HEADING
 
 print("YOUR TOTAL: $" + str(total_price))
