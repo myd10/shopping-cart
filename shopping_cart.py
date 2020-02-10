@@ -42,6 +42,14 @@ def to_usd(my_price):
 #
 
 Scanned_ID = input("Please enter a product ID number: ") #input returns a string datatype
+Matching_products = [each_item for each_item in products if str(each_item["id"]) == str(Scanned_ID)]
+Matching_product = Matching_products[0]
+
+print(Matching_product)
+print(Matching_products)
+
+
+
 
 print(type(Scanned_ID))
 print(Scanned_ID)
@@ -66,7 +74,7 @@ print("---------------")
 print("date and time")
 
 
-print(products)
+#print(products)
 
 print("For questions, comments, and concerns visit www.gregariousgroceries.com or give us a call at 202-954-3232")
 
