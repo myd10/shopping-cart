@@ -40,6 +40,9 @@ def to_usd(my_price):
 #
 # Input information / ID
 #
+
+total_price = 0
+
 while True:
     scanned_id = input("Please enter a product ID number: ") #input returns a string datatype
     if scanned_id == "DONE":
@@ -47,40 +50,34 @@ while True:
     else:
         matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
         matching_product = matching_products[0]
+        total_price = total_price + float(matching_product["price"])
         print("Scanned Item: " + str(matching_product["name"]) + " " + str(matching_product["price"]))
 
 #print(Matching_products)
 
-
-
-
 #print(type(scanned_id))
-print(scanned_id)
-
-
-
+#print(scanned_id)
 
 
 #
-# Calculate, filter out bad answers
+# Calculate, filter out bad answers, and display
 #
-
-
-#
-# display results
-#
-
-
+#HEADING
 print("---------------")
 print("Gregarious Groceries")
 print("---------------")
 print("date and time")
+#END OF HEADING
+
+print("YOUR TOTAL: $" + str(total_price))
+
 
 
 #print(products)
 
+#Bottom of Recipet
 print("For questions, comments, and concerns visit www.gregariousgroceries.com or give us a call at 202-954-3232")
-
+print("Have a GREGORIOUS day!")
 
 
 
