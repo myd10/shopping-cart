@@ -41,18 +41,20 @@ def to_usd(my_price):
 # Input information / ID
 #
 
-Scanned_ID = input("Please enter a product ID number: ") #input returns a string datatype
-Matching_products = [each_item for each_item in products if str(each_item["id"]) == str(Scanned_ID)]
-Matching_product = Matching_products[0]
-
-print(Matching_product)
-print(Matching_products)
+scanned_id = input("Please enter a product ID number: ") #input returns a string datatype
+matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
+matching_product = matching_products[0]
 
 
+print("Scanned Item: " + str(matching_product["name"]) + " " + str(matching_product["price"]))
+
+#print(Matching_products)
 
 
-print(type(Scanned_ID))
-print(Scanned_ID)
+
+
+#print(type(scanned_id))
+print(scanned_id)
 
 
 
