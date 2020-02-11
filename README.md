@@ -28,7 +28,7 @@ Run shopping_cart.py and print products to make sure it works!
 The file can be modified to email a reciept, read in products from a csv file, or link to google sheets.
 
 Your final output should look similar to:
-
+![Finaloutput](https://user-images.githubusercontent.com/59658326/74206823-0ba76780-4c4b-11ea-93c5-10b0020e38cf.JPG)
 
 Best of luck and have fun!
 
