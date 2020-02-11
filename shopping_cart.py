@@ -59,69 +59,70 @@ current_day = now.day
 current_hour = now.hour
 current_minute = now.minute
 
-
-#loop
+#loop and control over ids accepted
 while True:
-    scanned_id = input("Please enter a product ID number: ") #input returns a string datatype
+    scanned_id = input("Please enter a product ID number, or DONE if you are done: ") #input returns a string datatype
     if scanned_id == "DONE":
         break
+    elif int(scanned_id) > 20 or int(scanned_id) < 1:
+        print("This ID is not registered. Please enter a different ID.") 
     else:
         scanned_ids.append(scanned_id)
+
+#HEADING
+print("---------------")
+print("Gregarious Groceries")
+print("915 7th Ave, New York City, NY 10019")
+print("---------------")
+
+#TIME AND DATE
+if int(current_hour) > 12 and int(current_minute) > 9:
+    print("Purchased at " + str(current_hour - 12) + ":" + str(current_minute) + "pm on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
+elif int(current_hour) > 12 and int(current_minute) < 9:
+    print("Purchased at " + str(current_hour - 12) + ":0" + str(current_minute) + "pm on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
+elif int(current_hour) < 12 and int(current_minute) < 9:
+    print("Purchased at " + str(current_hour) + ":0" + str(current_minute) + "am on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
+else:
+    print("Purchased at " + str(current_time) + "am on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
+
+#PURCHASED ITEMS
+print("---------------")
+print("Today you purchased: ")
 
 for scanned_id in scanned_ids:
         matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
         matching_product = matching_products[0] #I have gotten an error here that the index is out of range
         subtotal_price = subtotal_price + matching_product["price"]
-        print(str(matching_product["name"]) + " " + str(matching_product["price"]))
-        
-#print(matching_products)
-
-#print(type(scanned_id))
-#print(scanned_id)
-
-
-#
-# Calculate, filter out bad answers, and display
-#
-
-#tax amount
-tax_amt = .10 * float(subtotal_price)
-
-#total 
+        print(" * " + str(matching_product["name"]) + " " + to_usd(matching_product["price"]))
+    
+#TOTAL COST
+tax_amt = .0875 * float(subtotal_price)
 total_price = subtotal_price + tax_amt
 
-#
-# Displaying results
-#
-
-#HEADING
 print("---------------")
-print("Gregarious Groceries")
-print("---------------")
-
-#time of purchase
-print("Purchased at " + str(current_time) + " on " + str(current_month) + "/" + str(current_day) + "/" + str(current_year))
-
-#What was purchased
-print("---------------")
-print("Today you purchased: ")
-
-#Total cost
-print("---------------")
-print("Subtotal: $" + f"${subtotal_price:,.2f}")
-print("Tax: $" + f"${tax_amt:,.2f}")
-print("Total amount: " + f"${total_price:,.2f}")
+print("Subtotal: $" + f"{subtotal_price:,.2f}")
+print("Tax: $" + f"{tax_amt:,.2f}")
+print("Total amount: $" + f"{total_price:,.2f}")
 
 #Thank you and come back
 print("---------------")
-print("For questions, comments, and concerns visit www.gregariousgroceries.com or give us a call at 202-954-3232")
-print("Have a GREGORIOUS day and we hope to see you again soon!")
-#print("\U0001f600")
+print("Have a GREGARIOUS day and we hope to see you again soon!")
+print("Check us out at www.gregariousgroceries.com or give us a call at 202-954-3232")
+print("---------------")
+
+er = input("Would you like an email copy of your recipet [y/n] ").lower()
+
+if er == "y":
+    input("Please enter your email address: ")
+else:
+    print("Okay! Have a great day!")
+    quit()
 
 
 
-# A grocery store name of your choice
-# A grocery store phone number and/or website URL and/or address of choice
+
+# A grocery store name of your choice 
+# A grocery store phone number and/or website URL and/or address of choice 
 # The date and time of the beginning of the checkout process, formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
 # The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $3.50, etc.)
 # The total cost of all shopping cart items (i.e. the "subtotal"), formatted as US dollars and cents (e.g. $19.47), calculated as the sum of their prices
