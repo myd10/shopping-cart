@@ -35,13 +35,11 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the desired output
 
-
-
 #
 # Input information / ID
 #
 
-#defined variables
+#DEFINED VARIABLES
 subtotal_price = 0
 tax_amt = 0
 total_price = 0
@@ -61,7 +59,7 @@ current_minute = now.minute
 
 #loop and control over ids accepted
 while True:
-    scanned_id = input("Please enter a product ID number, or DONE if you are done: ") #input returns a string datatype
+    scanned_id = input("Please enter a product ID number, or DONE: ") #input returns a string datatype
     if scanned_id == "DONE":
         break
     elif int(scanned_id) > 20 or int(scanned_id) < 1:
