@@ -1,34 +1,58 @@
-# shopping-cart
-Shopping cart exercise 2/10
+# Shopping-Cart-Exercise
+
+![image](https://user-images.githubusercontent.com/59658326/79157091-f57c6b80-7da1-11ea-92c0-fad8185bff36.png)
 
 ## Description
 
-This repo will create a receipt for a grocery store after users input product id numbers <br>
-Then the name of each product and its price will be printed <br>
-A subtotal, tax amount, and total amount will be printed as well. 
+This repository is able to create a grocery store receipt from a list of products! The final receipt will list all the products purhcased, date & time, subtotal, tax amount, total amount and store location. This repo has also been configured to email your receipt.  
 
 ## Installation
 
-Make a repo from your GitHub account. <br>
-Clone to desktop and launch Github desktop <br>
-Navigate there from the command line (cd /c/users/*your user name*/desktop/my-repo)
+Fork this repository and clone (or dowload) the repo onto your desktop. You can use GitHub Desktop or your command line to clone the repo. 
 
-visit https://github.com/myd10/shopping-cart/blob/master/shopping_cart.py to see an example Repo. 
+Navigate to the repo from the command line. For example:
 
-## Set up
+```sh
+cd /c/Users/name/Desktop/shopping-cart/
+```
 
-Create a file called shopping_cart.py either from the command line or editor <br>
-Add a shopping-env using conda create <br>
-Activate the env using conda activate
+Use the command line or Visual Studio Code to create a file called shopping_cart.py 
 
+## Set Up: Shopping Environment (1 time only)
+
+Create and activate a shopping environment:
+```sh
+conda create -n shopping-env python=3.7
+conda activate shopping-env
+```
+
+## Set Up: Sendgird API
+Sign up for a free account at https://signup.sendgrid.com
+
+Obtain your free API Key at https://app.sendgrid.com/settings/api_keys
+
+Store the API Key and your email in environment variables in the .env file.
+
+```sh
+SENDGRID_API_KEY = "you_API_Key"
+```
+
+```sh
+MY_EMAIL_ADDRESS = "your_email_address"
+```
 ## Usage
 
 Run shopping_cart.py and print products to make sure it works!
+```sh
+python shopping_cart.py
+```
 
-The file can be modified to email a reciept, read in products from a csv file, or link to google sheets.
+The file can be modified to link to google sheets.
 
-Your final output should look similar to:
+## Final Output
+Your Final output should look similar to the output below. 
+
 ![Finaloutput](https://user-images.githubusercontent.com/59658326/74206823-0ba76780-4c4b-11ea-93c5-10b0020e38cf.JPG)
 
-Best of luck and have fun!
+### Best of luck and have fun!
 
