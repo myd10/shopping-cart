@@ -23,6 +23,15 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
+
+#GOAL 1: fix USD formatting
+#GOAL 2: fix date and time function, display friendly human message without so much code
+#GOAL 3: write data to CSV?
+#Goal 4: get rid of reptition
+#GOAL 5: testing
+#GOAL 6: hit all checkpoints on product outline. 
+
+
 def to_usd(my_price):
     """
     Converts a numeric value to usd-formatted string, for printing and display purposes.
@@ -32,8 +41,6 @@ def to_usd(my_price):
     Returns: $4,000.44
     """
     return f"${my_price:,.2f}" #> $12,000.71
-
-# TODO: write some Python code here to produce the desired output
 
 #
 # Input information / ID
@@ -98,9 +105,9 @@ tax_amt = .0875 * float(subtotal_price)
 total_price = subtotal_price + tax_amt
 
 print("---------------")
-print("Subtotal: $" + f"{subtotal_price:,.2f}")
-print("Tax: $" + f"{tax_amt:,.2f}")
-print("Total amount: $" + f"{total_price:,.2f}")
+print(f"Subtotal: {to_usd(subtotal_price)}")
+print(f"Tax: {to_usd(tax_amt)}")
+print(f"Total amount: {to_usd(total_price)}")
 
 #Thank you and come back
 print("---------------")
