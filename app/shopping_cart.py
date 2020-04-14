@@ -61,6 +61,9 @@ def human_friendly_timestamp(now):
     """
     return datetime.now().strftime("%m/%d/%Y %I:%m %p")
 
+#TIME AND DATE
+now = datetime.now()
+
 def dashed_line():
     """
     Prints a dashed line to improve receipt readability
@@ -77,13 +80,18 @@ def find_product():
     Example: find_product(1)
     Returns: product[0]["name"]
     """
+    matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
+    return matching_product
 
+def calculate_total_price(list):
+    """
+    Calculates the total price for a list of products
+    Param: list of products
+    Example: [4.00, 5.00, 2.00, 10.50]
+    Returns: (4+5+2+10.50)*(1+ tax rate) = 23.38
+    """
+    total_price = subtotal_price + tax_amt
 
-
-
-#
-# Input information / ID
-#
 
 #DEFINED VARIABLES
 subtotal_price = 0
@@ -93,7 +101,7 @@ scanned_ids = [] #this will be a list to store scanned_id's and print after all 
 grocery_list = []
 
 
-#loop and control over ids accepted
+#LOOP & INPUT CONTROL
 while True:
     scanned_id = input("Please enter a product ID number, or DONE: ")
     if scanned_id.upper() == "DONE":
@@ -103,39 +111,33 @@ while True:
     else:
         scanned_ids.append(scanned_id)
 
-#HEADING
+#TOTAL COST
+tax_amt = .0875 * float(subtotal_price)
+total_price = subtotal_price + tax_amt
+
+#
+#Printing Receipt
+#
 dashed_line()
 print("Gregarious Groceries")
 print("915 7th Ave, New York City, NY 10019")
 
-
 dashed_line()
 print("Purchased: " + human_friendly_timestamp(now))
 
-
-#TIME AND DATE
-now = datetime.now()
-
-#PURCHASED ITEMS
 dashed_line()
 print("Today you purchased: ")
-
 for scanned_id in scanned_ids:
         matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
         matching_product = matching_products[0] #I have gotten an error here that the index is out of range
         subtotal_price = subtotal_price + matching_product["price"]
-        print(" * " + str(matching_product["name"]) + " " + to_usd(matching_product["price"]))
-    
-#TOTAL COST
-tax_amt = .0875 * float(subtotal_price)
-total_price = subtotal_price + tax_amt
+        print(" * " + str(matching_product["name"]) + " " + to_usd(matching_product["price"]))   
 
 dashed_line()
 print(f"Subtotal: {to_usd(subtotal_price)}")
 print(f"Tax: {to_usd(tax_amt)}")
 print(f"Total amount: {to_usd(total_price)}")
 
-#Thank you and come back
 dashed_line()
 print("Have a GREGARIOUS day and we hope to see you again soon!")
 print("Check us out at www.gregariousgroceries.com or give us a call at 202-954-3232")
