@@ -5,7 +5,7 @@ from sendgrid.helpers.mail import Mail
 
 load_dotenv()
 
-SENDGRID_API_KEY = "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"
+SENDGRID_API_KEY = ""
 MY_EMAIL_ADDRESS = "myd10@georgetown.edu"
 
 SENDGRID_TEMPLATE_ID = os.environ.get(SENDGRID_API_KEY)
