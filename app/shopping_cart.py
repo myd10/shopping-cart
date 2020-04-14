@@ -1,16 +1,13 @@
 # shopping_cart.py
 
-#GOAL 2: fix date and time function, display friendly human message without so much code
-#GOAL 3: write data to CSV?
-#Goal 4: get rid of reptition
-#GOAL 5: testing
-#GOAL 6: hit all checkpoints on product outline. 
+from dotenv import load_dotenv
+import os
 
-#
+load_dotenv()
+
+
 # MODULES
-#
 from datetime import datetime
-
 
 def to_usd(my_price):
     """
@@ -41,7 +38,7 @@ def dashed_line():
     """
     Prints a dashed line to improve receipt readability
     Param: none
-    Example: dashed_line
+    Example: dashed_line()
     Returns: "---------------------"
     """
     print("--------------------")
@@ -57,7 +54,17 @@ def find_product(product, list):
     matching_product = matching_products[0]
     return matching_product
 
-def calculate_total_price(list):
+def calculate_tax(tax_rate, subtotal_price):
+    """
+    This will calcuate the tax using the subtotal amount
+    Param: subtotal_price (any int or float amt)
+    Example: calculate_tax(15.00)
+    Returns: (15.00 * tax rate)
+    """
+    tax_amt = tax_rate *subtotal_price
+    return float(tax_amt)
+
+def calculate_total_price(subtotal_price, tax_amt):
     """
     Calculates the total price for a list of products
     Param: list of products
@@ -65,6 +72,7 @@ def calculate_total_price(list):
     Returns: (4+5+2+10.50)*(1+ tax rate) = 23.38
     """
     total_price = subtotal_price + tax_amt
+    return float(total_price)
 
 
 if __name__ == "__main__":
@@ -92,16 +100,12 @@ if __name__ == "__main__":
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-
-
-
     #DEFINED VARIABLES
     subtotal_price = 0
-    tax_amt = 0
     total_price = 0
     scanned_ids = [] #this will be a list to store scanned_id's and print after all id's have been entered
     now = datetime.now()
-
+    tax_rate = float(os.environ.get("TAX_RATE"))
 
     #LOOP 
     while True:
@@ -109,13 +113,12 @@ if __name__ == "__main__":
         if scanned_id.upper() == "DONE":
             break
         elif int(scanned_id) > 20 or int(scanned_id) < 1:
-            print("This ID is not registered. Please enter a different ID.") 
+            print("This ID is not registered. Please enter a different ID or DONE.") 
         else:
             scanned_ids.append(scanned_id)
 
     #TOTAL COST
-    tax_amt = .0875 * float(subtotal_price)
-    total_price = subtotal_price + tax_amt
+    #total_price = subtotal_price + tax_amt
 
     #
     #Printing Receipt
@@ -134,13 +137,11 @@ if __name__ == "__main__":
             #matching_product = matching_products[0] #I have gotten an error here that the index is out of range
             matching_product = find_product(scanned_id, products)
             print(" * " + str(matching_product["name"]) + " " + to_usd(matching_product["price"]))   
-
-            #subtotal_price = subtotal_price + matching_product["price"]
-            #rint(" * " + str(matching_product["name"]) + " " + to_usd(matching_product["price"]))   
+            subtotal_price = subtotal_price + matching_product["price"]  
 
     dashed_line()
     print(f"Subtotal: {to_usd(subtotal_price)}")
-    print(f"Tax: {to_usd(tax_amt)}")
+    print(f"Tax: {to_usd(calculate_tax(tax_rate,subtotal_price))}")
     print(f"Total amount: {to_usd(total_price)}")
 
     dashed_line()
