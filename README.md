@@ -25,29 +25,34 @@ Create and activate a shopping environment:
 conda create -n shopping-env python=3.7
 conda activate shopping-env
 ```
-
-## Set Up: Sendgird API
-Sign up for a free account at https://signup.sendgrid.com
-
-Obtain your free API Key at https://app.sendgrid.com/settings/api_keys
-
-Store the API Key and your email in environment variables in the .env file.
-
+Install pandas, pytest, and dotenv
 ```sh
-SENDGRID_API_KEY = "you_API_Key"
+pip install pandas
+pip install pytest
+pip install python=dotenv
 ```
 
+## Set Up: Custom Tax Rate
+
+Create an .env file in the root directory.
+
+Store your custom tax rate as an environment variable in the .env file.
+
 ```sh
-MY_EMAIL_ADDRESS = "your_email_address"
+TAX_RATE = .0875
 ```
+
 ## Usage
 
 Run shopping_cart.py and print products to make sure it works!
 ```sh
-python shopping_cart.py
+python app/shopping_cart.py
 ```
 
-The file can be modified to link to google sheets.
+You can test your changes by running pytest from the command line
+```sh
+pytest
+```
 
 ## Final Output
 Your Final output should look similar to the output below. 
