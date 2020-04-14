@@ -51,7 +51,6 @@ def human_friendly_timestamp(now):
     Returns: 2020-4-13 5:25pm
     """
     return (now).strftime("%m/%d/%Y %I:%M %p")
-    #datetime.
 
 def dashed_line():
     """
