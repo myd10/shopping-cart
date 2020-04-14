@@ -1,12 +1,31 @@
 # shopping_cart.py
 
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
 # MODULES
 from datetime import datetime
+
+products = [
+    {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
+    {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
+    {"id":3, "name": "Robust Golden Unsweetened Oolong Tea", "department": "beverages", "aisle": "tea", "price": 2.49},
+    {"id":4, "name": "Smart Ones Classic Favorites Mini Rigatoni With Vodka Cream Sauce", "department": "frozen", "aisle": "frozen meals", "price": 6.99},
+    {"id":5, "name": "Green Chile Anytime Sauce", "department": "pantry", "aisle": "marinades meat preparation", "price": 7.99},
+    {"id":6, "name": "Dry Nose Oil", "department": "personal care", "aisle": "cold flu allergy", "price": 21.99},
+    {"id":7, "name": "Pure Coconut Water With Orange", "department": "beverages", "aisle": "juice nectars", "price": 3.50},
+    {"id":8, "name": "Cut Russet Potatoes Steam N' Mash", "department": "frozen", "aisle": "frozen produce", "price": 4.25},
+    {"id":9, "name": "Light Strawberry Blueberry Yogurt", "department": "dairy eggs", "aisle": "yogurt", "price": 6.50},
+    {"id":10, "name": "Sparkling Orange Juice & Prickly Pear Beverage", "department": "beverages", "aisle": "water seltzer sparkling water", "price": 2.99},
+    {"id":11, "name": "Peach Mango Juice", "department": "beverages", "aisle": "refrigerated", "price": 1.99},
+    {"id":12, "name": "Chocolate Fudge Layer Cake", "department": "frozen", "aisle": "frozen dessert", "price": 18.50},
+    {"id":13, "name": "Saline Nasal Mist", "department": "personal care", "aisle": "cold flu allergy", "price": 16.00},
+    {"id":14, "name": "Fresh Scent Dishwasher Cleaner", "department": "household", "aisle": "dish detergents", "price": 4.99},
+    {"id":15, "name": "Overnight Diapers Size 6", "department": "babies", "aisle": "diapers wipes", "price": 25.50},
+    {"id":16, "name": "Mint Chocolate Flavored Syrup", "department": "snacks", "aisle": "ice cream toppings", "price": 4.50},
+    {"id":17, "name": "Rendered Duck Fat", "department": "meat seafood", "aisle": "poultry counter", "price": 9.99},
+    {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
+    {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
+    {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
+] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
+
 
 def to_usd(my_price):
     """
@@ -42,14 +61,14 @@ def dashed_line():
     """
     print("--------------------")
 
-def find_product(product, list):
+def find_product(product_id, list):
     """
     Returns the correct product in a list that matches a given identifier number
     Param: product identifier (integer)
     Example: find_product(1)
     Returns: product[0]["name"]
     """
-    matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
+    matching_products = [p for p in products if str(p["id"]) == str(product_id)]
     matching_product = matching_products[0]
     return matching_product
 
@@ -63,7 +82,7 @@ def calculate_tax(tax_rate, subtotal_price):
     tax_amt = tax_rate * subtotal_price
     return float(tax_amt)
 
-def calculate_total_price():
+def calculate_total_price(subtotal_price, tax_rate):
     """
     Calculates the total price for a list of products
     Param: list of products
@@ -74,6 +93,10 @@ def calculate_total_price():
     return total_price
 
 if __name__ == "__main__":
+
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
 
     products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -132,7 +155,7 @@ if __name__ == "__main__":
     dashed_line()
     print(f"Subtotal: {to_usd(subtotal_price)}")
     print(f"Tax: {to_usd(calculate_tax(tax_rate,subtotal_price))}")
-    print(f"Total amount: {to_usd(calculate_total_price())}")
+    print(f"Total amount: {to_usd(calculate_total_price(subtotal_price, tax_rate))}")
     dashed_line()
     print("Have a GREGARIOUS day and we hope to see you again soon!")
     print("Check us out at www.gregariousgroceries.com or give us a call at 202-954-3232")

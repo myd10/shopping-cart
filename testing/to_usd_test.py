@@ -1,11 +1,10 @@
-# testing the to_usd function
-# I think I can test everything in here
-# I am not sure yet
+#to_usd_test.py
+#testing the to_usd function
 
 from app.shopping_cart import to_usd
 
 def test_to_usd():
     result = to_usd(4000.4444)
-    assert result == "$4000.44"
+    assert result == "$4,000.44"
 
-
+#passed
