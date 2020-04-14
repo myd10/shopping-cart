@@ -5,7 +5,6 @@ import os
 
 load_dotenv()
 
-
 # MODULES
 from datetime import datetime
 
@@ -61,19 +60,18 @@ def calculate_tax(tax_rate, subtotal_price):
     Example: calculate_tax(15.00)
     Returns: (15.00 * tax rate)
     """
-    tax_amt = tax_rate *subtotal_price
+    tax_amt = tax_rate * subtotal_price
     return float(tax_amt)
 
-def calculate_total_price(subtotal_price, tax_amt):
+def calculate_total_price():
     """
     Calculates the total price for a list of products
     Param: list of products
     Example: [4.00, 5.00, 2.00, 10.50]
     Returns: (4+5+2+10.50)*(1+ tax rate) = 23.38
     """
-    total_price = subtotal_price + tax_amt
-    return float(total_price)
-
+    total_price = float(subtotal_price * (1 + tax_rate))
+    return total_price
 
 if __name__ == "__main__":
 
@@ -117,44 +115,25 @@ if __name__ == "__main__":
         else:
             scanned_ids.append(scanned_id)
 
-    #TOTAL COST
-    #total_price = subtotal_price + tax_amt
-
     #
     #Printing Receipt
     #
     dashed_line()
     print("Gregarious Groceries")
     print("915 7th Ave, New York City, NY 10019")
-
     dashed_line()
     print("Purchased: " + human_friendly_timestamp(now))
-
     dashed_line()
     print("Today you purchased: ")
     for scanned_id in scanned_ids:
-            #matching_products = [p for p in products if str(p["id"]) == str(scanned_id)]
-            #matching_product = matching_products[0] #I have gotten an error here that the index is out of range
             matching_product = find_product(scanned_id, products)
             print(" * " + str(matching_product["name"]) + " " + to_usd(matching_product["price"]))   
             subtotal_price = subtotal_price + matching_product["price"]  
-
     dashed_line()
     print(f"Subtotal: {to_usd(subtotal_price)}")
     print(f"Tax: {to_usd(calculate_tax(tax_rate,subtotal_price))}")
-    print(f"Total amount: {to_usd(total_price)}")
-
+    print(f"Total amount: {to_usd(calculate_total_price())}")
     dashed_line()
     print("Have a GREGARIOUS day and we hope to see you again soon!")
     print("Check us out at www.gregariousgroceries.com or give us a call at 202-954-3232")
     dashed_line()
-
-
-    #possible email attachment for future
-    #er = input("Would you like an email copy of your recipet [y/n] ").lower()
-    #
-    #if er == "y":
-    #    input("Please enter your email address: ")
-    #else:
-    #    print("Okay! Have a great day!")
-    #    quit()
